@@ -12,7 +12,7 @@ class Autobase {
 
 	static void migrate() {
 		def fileOpener = GrailsFileOpenerFactory.fileOpener
-		def db = database
+		Database db = database
 		if(fileOpener.getResource("changelog.xml")) {
 			new LiquibaseDsl("grails-app/migrations/changelog.xml", fileOpener, db).update(null)
 		}

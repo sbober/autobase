@@ -16,11 +16,10 @@
 
 class AutobaseGrailsPlugin {
     def version = 0.1
-    def dependsOn = [liquibase:"* > 1.7", hibernate: "* > 1.0"]
-		def observe = ["hibernate", "liquibase"]
+    def dependsOn = [ hibernate: "* > 1.0"]
+		def observe = ["hibernate"]
 		def watchedResources = [ 
       "file:./grails-app/migration/*.groovy",
-      "file:./grails-app/migration/*.xml",
       "file:./grails-app/migration/*/*.groovy"
     ]
 
