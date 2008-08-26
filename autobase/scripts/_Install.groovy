@@ -13,5 +13,6 @@ grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
 //includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
 //event("StatusUpdate", "Installing Autobase")
 Ant.mkdir(dir:"${grailsHome}/migration/changesets")
+Ant.rm(file:"${grailsHome}/plugins/autobase-0.1/lib/liquibase-1.7.0.jar", verbose:"true") // Duplicated with liquibase
 //event("StatusFinal", "Finished installing Autobase")
 //event("PluginInstalled", "Autobase")
