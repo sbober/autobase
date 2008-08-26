@@ -1,3 +1,4 @@
+import liquibase.database.Database;
 import liquibase.log.LogFactory;
 import liquibase.dsl.command.MigrateCommand
 import org.liquibase.grails.GrailsFileOpener
@@ -8,13 +9,18 @@ class Autobase {
 
 	static void migrate() {
 		try {
-			new LiquibaseDsl(generateGroovyChangeSet(), new GrailsFileOpener(), database).update(null)
+			new LiquibaseDsl(generateGroovyChangeSet(), GrailsFileOpenerFactory.fileOpener, database).update(null)
 		} catch(Exception e) {
 			
 		}
 	}
 
-	
+	static void generateGroovyChangeSet() {
+		// TODO Implement this
+	}	
 
+	static Database getDatabase() {
+		// TODO Implement this
+	}
 
 }
