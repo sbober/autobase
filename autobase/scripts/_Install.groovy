@@ -10,7 +10,8 @@
 
 Ant.property(environment:"env")
 grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
-includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
-event("StatusUpdate", "Installing Autobase")
-event("StatusFinal", "Finished installing Autobase")
-event("PluginInstalled", "Autobase")
+//includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
+//event("StatusUpdate", "Installing Autobase")
+Ant.mkdir(dir:"${grailsHome}/migration/changesets")
+//event("StatusFinal", "Finished installing Autobase")
+//event("PluginInstalled", "Autobase")
