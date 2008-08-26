@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cp ../liquibase-dsl/lbdsl.jar ./autobase/lib/
