@@ -1,5 +1,3 @@
-package org.liquibase.grails;
-
 import liquibase.FileOpener;
 
 import java.io.InputStream;
@@ -7,8 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 
-public class GrailsClassLoaderFileOpener extends ClassLoaderFileOpener implements FileOpener {
-
+public class GrailsFileSystemFileOpener implements FileOpener {
     public InputStream getResourceAsStream(String file) throws IOException {
         return getClass().getClassLoader().getResourceAsStream("grails-app/migrations/"+file);
     }

@@ -1,14 +1,13 @@
-import liquibase.ClassLoaderFileOpener
+import liquibase.*
 import org.codehaus.groovy.grails.commons.ApplicationHolder
-import org.liquibase.grails.GrailsFileOpener
 
 class GrailsFileOpenerFactory {
 
 	static FileOpener getFileOpener() {
 		if (ApplicationHolder.application.isWarDeployed()) {
-    	return new ClassLoaderFileOpener()
+    	return new GrailsClassLoaderFileOpener()
     } else {
-    	return new GrailsFileOpener()
+    	return new GrailsFileSystemFileOpener()
     }		
 	}
 
