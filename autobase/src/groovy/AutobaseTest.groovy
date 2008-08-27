@@ -12,7 +12,7 @@ class AutobaseTest {
     println "===EXECUTING AUTOBASE BEGIN==="
     new StringBuilder(5)
     println "===CREATING PROPERTIES==="
-    println "DEFAULT USER: ${new LbdslProperties().defaultUser}"
+    println "DEFAULT USER: ${new LbdslProperties().defaultAuthor}"
     println "===EXECUTING AUTOBASE BEGIN==="
 	}
 
