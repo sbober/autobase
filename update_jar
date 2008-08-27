@@ -1,3 +1,6 @@
 #!/bin/bash
 
+cd ../liquibase-dsl
+./maker
+cd ../autobase
 cp ../liquibase-dsl/lbdsl.jar ./autobase/lib/

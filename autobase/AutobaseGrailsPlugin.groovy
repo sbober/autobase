@@ -39,7 +39,7 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 
 		private static final def doMigrate = { ignored ->
 			try {
-				Autobase.migrate()
+				AutobaseTest.migrate()
 			} catch(Exception e) {
 				GrailsUtil.sanitizeStackTrace(e)
 				e.printStackTrace()

@@ -2,7 +2,7 @@ import liquibase.*
 import liquibase.database.Database;
 import liquibase.log.LogFactory;
 import liquibase.dsl.command.MigrateCommand
-import liquibase.dsl.properties.LbdslProperties as Props
+import liquibase.dsl.properties.LbdslProperties
 import org.codehaus.groovy.grails.commons.ConfigurationHolder as Config
 import grails.util.GrailsUtil
 
@@ -12,7 +12,13 @@ class Autobase {
 
 	static void migrate() {
 		def fileOpener = GrailsFileOpenerFactory.fileOpener
-		Database db = database
+		def inst = LbdslProperties.instance
+		def props = inst.properties
+		props[LbdslProperties.DB_DRIVER_PROPERTY] = Config.config.dataSource.driverClassName.toString()
+		props[LbdslProperties.DB_USER_PROPERTY] = Config.config.dataSource.username.toString()
+		props[LbdslProperties.DB_PASS_PROPERTY] = Config.config.dataSource.password.toString()
+		props[LbdslProperties.DB_URL_PROPERTY] = Config.config.dataSource.url.toString()
+		Database db = inst.database
 		if(fileOpener.getResource("changelog.xml")) {
 			new LiquibaseDsl("grails-app/migrations/changelog.xml", fileOpener, db).update(null)
 		}
@@ -42,7 +48,7 @@ class Autobase {
     return out.getPath()
 	}	
 
-	static Database getDatabase() {
+/*	static Database getDatabase() {
 		def inst = Props.instance
 		def props = inst.properties
 		props[Props.DB_DRIVER_PROPERTY] = Config.config.dataSource.driverClassName.toString()
@@ -50,6 +56,6 @@ class Autobase {
 		props[Props.DB_PASS_PROPERTY] = Config.config.dataSource.password.toString()
 		props[Props.DB_URL_PROPERTY] = Config.config.dataSource.url.toString()
 		return inst.database
-	}
+	} */
 
 }
