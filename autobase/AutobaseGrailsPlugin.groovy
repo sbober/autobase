@@ -14,6 +14,8 @@
   limitations under the License.
 */
 
+import grails.util.GrailsUtil;
+
 class AutobaseGrailsPlugin {
     def version = 0.1
     def dependsOn = [ hibernate: "* > 1.0"]
@@ -39,9 +41,9 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 
 		private static final def doMigrate = { ignored ->
 			try {
-				AutobaseTest.migrate()
+				Autobase.migrate()
 			} catch(Exception e) {
-				GrailsUtil.sanitizeStackTrace(e)
+				GrailsUtil.sanitize(e)
 				e.printStackTrace()
 			}
 		}
