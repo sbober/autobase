@@ -10,8 +10,10 @@ class AutobaseTest {
 
 	static void migrate() {
     println "===EXECUTING AUTOBASE BEGIN==="
-    new LbdslProperties()
-    println "===EXECUTING AUTOBASE END==="
+    new StringBuilder(5)
+    println "===CREATING PROPERTIES==="
+    println "DEFAULT USER: ${new LbdslProperties().defaultUser}"
+    println "===EXECUTING AUTOBASE BEGIN==="
 	}
 
 }
