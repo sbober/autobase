@@ -11,5 +11,17 @@
 Ant.property(environment:"env")
 grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
 
+def migDir = "${basedir}/migration"
+def fileName = "${migDir}/DatabaseChangeLog.groovy" 
 
-Ant.mkdir(dir:"${grailsHome}/migration/changesets")
+Ant.mkdir(dir:migDir)
+Ant.sequential {
+  copy(file:"${pluginBaseDir}/src/templates/artifacts/DatabaseChangeLog.groovy",
+     tofile:fileName,
+     overwrite:false
+  )
+  replace(file:fileName,
+      token:"@APPNAME@", 
+      value:org.codehaus.groovy.grails.commons.ApplicationHolder.application.metadata['app.name'])
+}
+

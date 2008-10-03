@@ -13,12 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
-
+import liquibase.LiquibaseDsl;
 import grails.util.GrailsUtil;
 
 class AutobaseGrailsPlugin {
     def version = 0.1
-    def dependsOn = [ hibernate: "* > 1.0"]
+    def dependsOn = [ hibernate:1.0 ]
 		def observe = ["hibernate"]
 		def watchedResources = [ 
       "file:./grails-app/migration/*.groovy",
@@ -39,28 +39,23 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
     def documentation = "http://github.com/RobertFischer/autobase/"
 		//"http://grails.org/Autobase+Plugin"
 
-		private static final def doMigrate = { ignored ->
+		private static final def doMigrate = { 
 			try {
 				Autobase.migrate()
 			} catch(Exception e) {
-				GrailsUtil.sanitize(e)
+				GrailsUtil.deepSanitize(e)
 				e.printStackTrace()
 			}
 		}
 
-    def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
-    }
+    def doWithSpring = { }
    
-    def doWithApplicationContext = doMigrate
+    def doWithApplicationContext = {}
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional)
-    }
+    def doWithWebDescriptor = {}
 	                                      
-    def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
-    }
+    // Do at the very last moment of app start-up
+    def doWithDynamicMethods = doMigrate
 
     // Implements code that is executed when any artefact that this plugin is
     // watching is modified and reloaded. The event contains: event.source,

@@ -3,4 +3,6 @@
 cd ../liquibase-dsl
 ./maker
 cd ../autobase
+rm -v ./autobase/lib/*.jar
 cp -v ../liquibase-dsl/lbdsl.jar ./autobase/lib/
+cp -v ../liquibase-dsl/lib/*.jar ./autobase/lib/

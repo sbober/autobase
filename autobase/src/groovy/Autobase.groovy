@@ -3,6 +3,7 @@ import liquibase.database.Database;
 import liquibase.log.LogFactory;
 import liquibase.dsl.command.MigrateCommand
 import liquibase.dsl.properties.LbdslProperties as Props
+import liquibase.parser.groovy.*;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder as Config
 import grails.util.GrailsUtil
 
@@ -16,8 +17,7 @@ class Autobase {
 		Database db = getDatabase();
 		if(fileOpener.getResourceAsStream("changelog.xml")) {
 			new LiquibaseDsl("grails-app/migrations/changelog.xml", fileOpener, db).update(null)
-		}
-    if("development".equals(GrailsUtil.environment)) {
+		} else if("development".equals(GrailsUtil.environment)) {
       new LiquibaseDsl(generateGroovyChangeSet(), new FileSystemFileOpener(), db).update(null)
     } else if(fileOpener.getResourceAsStream("changelog.groovy")) {
 		  new LiquibaseDsl("changelog.groovy", fileOpener, db).update(null)
