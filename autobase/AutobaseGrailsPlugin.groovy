@@ -18,11 +18,12 @@ import grails.util.GrailsUtil;
 
 class AutobaseGrailsPlugin {
     def version = 0.1
-    def dependsOn = [ hibernate:1.0 ]
-		def observe = ["hibernate"]
+    def dependsOn = [:]
+		def observe = []
 		def watchedResources = [ 
       "file:./grails-app/migration/*.groovy",
-      "file:./grails-app/migration/*/*.groovy"
+      "file:./grails-app/migration/*/*.groovy",
+      "file:./grails-app/domain/*.groovy"
     ]
 
     // TODO Fill in these fields

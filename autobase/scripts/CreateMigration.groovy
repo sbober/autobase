@@ -27,7 +27,7 @@ target ('default': "Creates a new migration") {
 		
 	Ant.sequential {  
     mkdir(dir:dir)
-		copy(file:"${pluginBaseDir}/src/templates/artifacts/Migration.groovy",
+		copy(file:"${pluginBasedir}/src/templates/artifacts/Migration.groovy",
 			 tofile:fileName) 
 		replace(file:fileName, 
 				token:"@AUTHOR@", value:author )
