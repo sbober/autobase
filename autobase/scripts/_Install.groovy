@@ -11,6 +11,6 @@ def fileName = "${migDir}/changelog.groovy"
 
 Ant.mkdir(dir:migDir)
 Ant.sequential {
-  copy(file:"${pbd}/src/templates/artifacts/DatabaseChangeLog.groovy", tofile:"${fileName}")
+  copy(verbose:"true", file:"${pbd}/src/templates/artifacts/DatabaseChangeLog.groovy", tofile:"${fileName}")
   replace(file:"${fileName}", token:'@APPNAME@', value:"${appName}")
 }
