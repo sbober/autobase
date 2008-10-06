@@ -15,9 +15,16 @@
 */
 import liquibase.LiquibaseDsl;
 import grails.util.GrailsUtil;
+import org.apache.log4j.*;
+
 
 class AutobaseGrailsPlugin {
+
+    private static final Logger log = Logger.getLogger(AutobaseGrailsPlugin);
+
     def version = 0.1
+    //def dependsOn = [hibernate:GrailsUtil.grailsVersion]
+		//def observe = ['hibernate']
     def dependsOn = [:]
 		def observe = []
 		def watchedResources = [ 
@@ -42,10 +49,12 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 
 		private static final def doMigrate = { 
 			try {
+        log.info("Beginning Autobase migration") 
 				Autobase.migrate()
+        log.info("Successfully completed Autobase migration") 
 			} catch(Exception e) {
 				GrailsUtil.deepSanitize(e)
-				e.printStackTrace()
+				log.error("Error during Autobase migration", e)
 			}
 		}
 

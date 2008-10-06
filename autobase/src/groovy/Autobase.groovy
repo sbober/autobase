@@ -17,8 +17,6 @@ class Autobase {
 		Database db = getDatabase();
 		if(fileOpener.getResourceAsStream("changelog.xml")) {
 			new LiquibaseDsl("grails-app/migrations/changelog.xml", fileOpener, db).update(null)
-		} else if("development".equals(GrailsUtil.environment)) {
-      new LiquibaseDsl(generateGroovyChangeSet(), new FileSystemFileOpener(), db).update(null)
     } else if(fileOpener.getResourceAsStream("changelog.groovy")) {
 		  new LiquibaseDsl("changelog.groovy", fileOpener, db).update(null)
     } else {
@@ -35,23 +33,6 @@ class Autobase {
                                   Config.config.autobase."$propName" ?:
                                   defValue
   }
-
-	static String generateGroovyChangeSet() {
-    def out = new File("grails-app/migrations/changelog.groovy")
-    if(out.exists()) { out.delete() }
-
-    // TODO Add preconditions for db type, user?
-    File dir = new File("grails-app/migrations/changesets")
-    out.text = dir.listFiles().findAll { 
-       it.path.toLowerCase().endsWith(".groovy")
-    }.sort { a,b -> 
-      a.absolutePath <=> b.absolutePath 
-    }.inject("dbChangeLog() {\n") { memo, file ->
-      "${memo}\tinclude('${file.path}')\n"
-    } + "}\n"
-
-    return out.getPath()
-	}	
 
 	static Database getDatabase() {
 		def inst = Props.instance

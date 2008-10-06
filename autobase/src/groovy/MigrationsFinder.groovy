@@ -10,14 +10,15 @@ class MigrationsFinder {
       changeLogs = [:]
       def entry
       while(entry = resources.nextEntry()) {
-        if(entry.isDirectory()) { next }
-        def outLine = new ByteArrayOutputStream()
-        while(resources.available()) {
-          outLine.write(resources.read())
+        if(!entry.isDirectory())  {
+          def outLine = new ByteArrayOutputStream()
+          while(resources.available()) {
+            outLine.write(resources.read())
+          }
+          outLine.close()
+          resources.closeEntry()
+          changeLogs[entry.name] = new ByteArrayInputStream(outLine.toByteArray())
         }
-        outLine.close()
-        resources.closeEntry()
-        changeLogs[entry.name] = new ByteArrayInputStream(outLine.toByteArray())
       }
       changeLogs = (changeLogs.entrySet() as List).sort({a,b -> a.key <=> b.key })*.values
     } else {
@@ -28,9 +29,9 @@ class MigrationsFinder {
 
   private static final def changeLogFilesFromDir(final File dir) {
     def changeLogs = []
-    def root = it.listFiles()
+    def root = dir.listFiles()
     root.findAll { it.isDirectory() }.each { changeLogs << changeLogsFilesFromDir(it) }
-    def changeLogs = (root.findAll {
+    changeLogs << (root.findAll {
       it.isFile() && it.name.endsWith('Migration.groovy')
     } ?: [])*.canonicalPath
     return changeLogs.flatten()*.sort( {a,b -> a.name <=> b.name })
