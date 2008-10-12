@@ -13,6 +13,7 @@ class Autobase {
 
 	static void migrate() {
     try {
+      if(GrailsUtil.isDevelopmentEnv()) { LogFactory.loggingLevel = "ALL" }
       assignSystemProperties();
       def fileOpener = new FileSystemFileOpener()
       Database db = getDatabase();
