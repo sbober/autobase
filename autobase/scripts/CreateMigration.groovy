@@ -35,8 +35,13 @@ target ('default': "Creates a new migration") {
         token:"@ID@", value:name )
 	}	                                                                            
 	println "Migration generated at ${fileName}"
-  if(Ant.antProject.properties."env.EDITOR") {
-    Runtime.runtime.exec(Ant.antProject.properties."env.EDITOR" + " " + fileName)
+  def editor = Ant.antProject.properties."env.EDITOR"
+  if(editor) {
+    def proc = Runtime.runtime.exec("${editor} ${fileName}") 
+    proc.waitFor()
+    if(proc.exitValue() != 0) {
+      println "Error trying to edit ${fileName} with ${editor}"
+    }
   } else {
     println "(If you set the EDITOR environment variable, you could edit the file directly.)"
   }
