@@ -11,5 +11,6 @@ rm -rvf ./plugins/*
 grails install-plugin ../autobase/grails-auto*.zip
 rm -rf ~/.grails
 grails clean
-grails create-migration testing
+cp -vf TestingMigration.groovy ./migrations/TestingMigration.groovy
+cp -vf changelog.groovy ./migrations/changelog.groovy
 grails run-app
