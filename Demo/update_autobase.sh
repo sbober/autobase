@@ -6,8 +6,10 @@ rm -rf ~/.grails
 grails clean
 grails package-plugin
 cd ../Demo
-rm -rvf ./grails-app/migrations/*
-grails install-plugin ../autobase/autobase/grails-auto*.zip
+rm -rvf ./migrations/*
+rm -rvf ./plugins/*
+grails install-plugin ../autobase/grails-auto*.zip
 rm -rf ~/.grails
 grails clean
+grails create-migration testing
 grails run-app

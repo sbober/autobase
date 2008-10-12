@@ -1,3 +1,5 @@
+package autobase;
+
 import org.codehaus.groovy.grails.commons.ApplicationHolder as AH;
 import java.util.zip.*
 

@@ -35,7 +35,7 @@ class AutobaseGrailsPlugin {
 
     // TODO Fill in these fields
     def author = "Robert Fischer"
-    def authorEmail = "autobase@smokejumperit.com"
+    def authorEmail = "robert.fischer@smokejumperit.com"
     def title = "Automate your database work as much as possible"
     def description = '''\
 This plugin marries the established Liquibase core with Grails development processes in order to to minimze the amount of database code you have to think about.

@@ -6,7 +6,7 @@ if(!pbd) { throw new IllegalStateException("No plugin base directory") }
 def appName = grailsAppName
 if(!appName) { throw new IllegalStateException("No application name provided") }
 
-def migDir = "${basedir}/migration"
+def migDir = "${basedir}/migrations"
 def fileName = "${migDir}/changelog.groovy" 
 
 Ant.mkdir(dir:migDir)

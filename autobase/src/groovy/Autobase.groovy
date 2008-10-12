@@ -12,15 +12,18 @@ class Autobase {
   private static final def log = LogFactory.getLogger();
 
 	static void migrate() {
-    assignSystemProperties();
-		def fileOpener = GrailsFileOpenerFactory.fileOpener
-		Database db = getDatabase();
-		if(fileOpener.getResourceAsStream("changelog.xml")) {
-			new LiquibaseDsl("grails-app/migrations/changelog.xml", fileOpener, db).update(null)
-    } else if(fileOpener.getResourceAsStream("changelog.groovy")) {
-		  new LiquibaseDsl("changelog.groovy", fileOpener, db).update(null)
-    } else {
-		  // No "changelog.groovy", not in development -- do nothing
+    try {
+      assignSystemProperties();
+      def fileOpener = new FileSystemFileOpener()
+      Database db = getDatabase();
+      if(fileOpener.getResourceAsStream("./migrations/changelog.groovy")) {
+        new LiquibaseDsl("./migrations/changelog.groovy", fileOpener, db).update(null)
+      } else {
+        log.warning("No changelog found")
+      }
+    } catch(Exception e) {
+      GrailsUtil.deepSanitize(e)
+      throw e
     }
 	}
 

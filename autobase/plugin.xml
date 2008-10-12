@@ -1,6 +1,6 @@
 <plugin name='autobase' version='0.1'>
   <author>Robert Fischer</author>
-  <authorEmail>autobase@smokejumperit.com</authorEmail>
+  <authorEmail>robert.fischer@smokejumperit.com</authorEmail>
   <title>Automate your database work as much as possible</title>
   <description>This plugin marries the established Liquibase core with Grails development processes in order to to minimze the amount of database code you have to think about.
 

@@ -39,16 +39,18 @@ environments {
 }
 
 // log4j configuration
+def pattern = '[%d{ISO8601}] %-6p %-30c{2} %-20t %m%n'
 log4j {
     appender.stdout = "org.apache.log4j.ConsoleAppender"
     appender.'stdout.layout'="org.apache.log4j.PatternLayout"
-    appender.'stdout.layout.ConversionPattern'='[%r] %c{2} %m%n'
+    appender.'stdout.layout.ConversionPattern'=pattern
     appender.stacktraceLog = "org.apache.log4j.FileAppender"
     appender.'stacktraceLog.layout'="org.apache.log4j.PatternLayout"
-    appender.'stacktraceLog.layout.ConversionPattern'='[%r] %c{2} %m%n'
+    appender.'stacktraceLog.layout.ConversionPattern'=pattern
     appender.'stacktraceLog.File'="stacktrace.log"
     rootLogger="error,stdout"
     logger {
+        AutobaseGrailsPlugin="debug"
         grails="error"
         StackTrace="error,stacktraceLog"
         org {
@@ -61,8 +63,10 @@ log4j {
             codehaus.groovy.grails.plugins="error" // plugins
             codehaus.groovy.grails.orm.hibernate="error" // hibernate integration
             springframework="off"
-            hibernate="off"
+            //hibernate="error"
         }
+        org."hibernate"="error"
+        org."hibernate.SQL"="debug"
     }
     additivity.StackTrace=false
 }

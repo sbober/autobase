@@ -8,7 +8,7 @@ grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
 includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
 
 target ('default': "Creates a new migration") {
-  def timestamp = Long.toString(System.currentTimeMillis(), 16).toUpperCase() 
+  String timestamp = System.currentTimeMillis().toString()
   def name = args?.toString()
 	if(!name) {
 		Ant.input(addProperty:"migration.name", message:"Migration name not specified (press enter for auto-generated name)")
@@ -21,13 +21,13 @@ target ('default': "Creates a new migration") {
 
   def author = Props.instance.defaultAuthor
   author = author.split(/\s+/).collect { SU.capitalize(it) }.join("")
-  def dir = "${basedir}/grails-app/migrations/${author}"
+  def dir = "${basedir}/migrations/${author}"
 		      
 	def fileName = "${dir}/${name}Migration.groovy"
 		
 	Ant.sequential {  
     mkdir(dir:dir)
-		copy(file:"${pluginBasedir}/src/templates/artifacts/Migration.groovy",
+		copy(file:"${autobasePluginDir}/src/templates/artifacts/Migration.groovy",
 			 tofile:fileName) 
 		replace(file:fileName, 
 				token:"@AUTHOR@", value:author )
@@ -35,4 +35,7 @@ target ('default': "Creates a new migration") {
         token:"@ID@", value:name )
 	}	                                                                            
 	println "Migration generated at ${fileName}"
+  if(Ant.antProject.properties."env.editor") {
+    Runtime.runtime.exec(Ant.antProject.properties."env.editor" + " " + fileName)
+  }
 }
