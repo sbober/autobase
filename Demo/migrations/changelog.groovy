@@ -2,7 +2,7 @@
 databaseChangeLog(logicalFilePath:'Demo-autobase') { 
   includeAll('./migrations')
   changeSet(id:"1", author:"bob") {
-        comment("A sample change log")
+        comments("A sample change log")
         createTable(tableName:"foo")
   }
   changeSet(id:"2", author:"bob", runAlways:"true") {
