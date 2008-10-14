@@ -7,7 +7,8 @@ grails clean
 grails package-plugin
 cd ../Demo
 rm -rvf ./migrations/*
-rm -rvf ./plugins/*
+rm -rvf ./plugins/grails-autobase*
+rm -rvf ./plugins/autobase*
 grails install-plugin ../autobase/grails-auto*.zip
 rm -rf ~/.grails
 grails clean

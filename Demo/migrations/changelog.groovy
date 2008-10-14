@@ -3,7 +3,9 @@ databaseChangeLog(logicalFilePath:'Demo-autobase') {
   includeAll('./migrations')
   changeSet(id:"1", author:"bob") {
         comments("A sample change log")
-        createTable(tableName:"foo")
+        createTable(tableName:"foo") {
+          column(name:"id", type:"int")
+        }
   }
   changeSet(id:"2", author:"bob", runAlways:"true") {
     addColumn(tableName:"foo") {
