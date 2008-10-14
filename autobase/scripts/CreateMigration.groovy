@@ -8,13 +8,13 @@ grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
 includeTargets << new File ( "${grailsHome}/scripts/Init.groovy" )
 
 target ('default': "Creates a new migration") {
-  String timestamp = System.currentTimeMillis().toString()
   def name = args?.toString()
 	if(!name) {
 		Ant.input(addProperty:"migration.name", message:"Migration name not specified (press enter for auto-generated name)")
 		name = Ant.antProject.properties."migration.name"
 	}
   if(name == null || SU.isBlank(name)) {
+    String timestamp = new SimpleDateFormat("yyyyMMdd.HHmmss").format(new Date())
     name = timestamp
   }
   name = name.split(/\s+/).collect { SU.capitalize(it) }.join("")

@@ -14,4 +14,5 @@ rm -rf ~/.grails
 grails clean
 cp -vf TestingMigration.groovy ./migrations/TestingMigration.groovy
 cp -vf changelog.groovy ./migrations/changelog.groovy
-grails run-app
+grails convert-xml-changelog common.tests.changelog.xml ./migrations/common.tests.changelog.groovy
+#grails run-app

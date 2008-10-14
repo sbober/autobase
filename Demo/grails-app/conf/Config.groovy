@@ -65,7 +65,7 @@ log4j {
             springframework="off"
             //hibernate="error"
         }
-        org."hibernate"="error"
+        org."hibernate"="info"
         org."hibernate.SQL"="debug"
     }
     additivity.StackTrace=false
