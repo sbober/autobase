@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.8 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.8.xsd">
 
     <property name="table.name" value="paramter_table"/>
-    <property file="changelogs/common/dynamic.parameters.properties"/>
+    <property file="autobase.properties" />
     <property name="column1.name" value="updated-columnA"/>
     <property name="column2.name" value="columnB"/>
 
@@ -371,10 +371,10 @@
         </createTable>
     </changeSet>
     <changeSet id="sampleCSVData" author="nvoxland">
-        <loadData tableName="csvdata" file="changelogs/sample.data1.csv"/>
+        <loadData tableName="csvdata" file="sample.data1.csv"/>
     </changeSet>
     <changeSet id="sampleCSVData2" author="nvoxland">
-        <loadData tableName="csvdata" file="changelogs/sample.data2.csv">
+        <loadData tableName="csvdata" file="sample.data2.csv">
             <column header="locked" type="BOOLEAN"/>
             <column header="last_login" type="DATE"/>
             <column header="security_level" type="NUMERIC"/>
@@ -385,7 +385,7 @@
         <preConditions>
             <sqlCheck expectedResult="4">select count(*) from csvdata</sqlCheck>
         </preConditions>
-        <loadData tableName="csvdata" file="changelogs/sample.data3.csv">
+        <loadData tableName="csvdata" file="sample.data3.csv">
             <column index="0" name="name" type="STRING"/>
             <column header="last seen" name="last_login" type="DATE"/>
             <column header="locked" type="BOOLEAN"/>
@@ -477,7 +477,7 @@
 
     <changeSet id="changeSetRanPrecondition" author="nvoxland">
         <preConditions>
-            <changeSetExecuted id="changeLogParameters" author="nvoxland" changeLogFile="changelogs/common/common.tests.changelog.xml"/>
+            <changeSetExecuted id="changeLogParameters" author="nvoxland" changeLogFile="common.tests.changelog.groovy"/>
         </preConditions>
         <createTable tableName="changesetprecondition_ran">
             <column name="id" type="int"/>

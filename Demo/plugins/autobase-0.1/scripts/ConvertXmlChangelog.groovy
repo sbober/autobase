@@ -36,7 +36,7 @@ target('default': "Converts a full or partial changelog.xml file into a changelo
   File targetFile = new File(targetName)
 
   Writer target = new BufferedWriter(new FileWriter(targetFile, false))
-  new XmlParser().parse(sourceFile).each { processNode(it, target) }
+  new XmlParser().parse(sourceFile).children().each { processNode(it, target) }
   target.close()
 }
 
@@ -53,22 +53,42 @@ private String stripNamespace(final QName nodeName) {
 }
 
 private void processNode(final Node node, final Writer writer, final int depth=0) {
-  (0..<depth).each{ writer.write('\t') }; writer.write(stripNamespace(node.name().toString()))
-  writer.write('( ')
-  List inParens = []
-  String textBody = node.children().find { it instanceof String }
-  if(textBody) { inParens << "'${textBody}'" }
-  node.attributes().entrySet().each { inParens << "${stripNamespace(it.key)}: '$it.value'" }
-  writer.write(inParens.join(', ') ?: '')
-  writer.write(' )')
-  def children = node.children().findAll { !(it instanceof String) }
-  if(children) {
-    (0..<depth).each { writer.write('\t') }; writer.write('{\n')
-    children.each { 
-      println "Processing ${it.getClass().simpleName}: ${it}"
-      processNode(it, writer, depth + 1)
+  final String nodeName = stripNamespace(node.name())
+
+/*
+  if(nodeName.equalsIgnoreCase("property")) {
+    println "Processing property ${nodeName}"
+    (0..<depth).each{ writer.write('\t') }
+    writer.write("delegate.'")
+    writer.write(node.attributes().name)
+    writer.write("' = \"")
+    writer.write(node.attributes().value)
+    writer.write("\"")
+    writer.write('\n')
+  } else {
+*/
+
+    println "Processing node ${nodeName}"
+    (0..<depth).each{ writer.write('\t') }; writer.write(nodeName)
+    writer.write('( ')
+    List inParens = []
+    String textBody = node.children().find { it instanceof String }
+    if(textBody) { 
+      textBody = SU.replace(textBody, '\n', '\\n')
+      inParens << "'${textBody}'"
     }
-    (0..<depth).each { writer.write('\t') }; writer.write('}\n')
-  }
-  writer.write('\n')
+    node.attributes().entrySet().each { inParens << "${stripNamespace(it.key)}: \"$it.value\"" }
+    writer.write(inParens.join(', ') ?: '')
+    writer.write(' )')
+    def children = node.children().findAll { !(it instanceof String) }
+    if(children) {
+      (0..<depth).each { writer.write('\t') }; writer.write('{\n')
+      children.each { 
+        processNode(it, writer, depth + 1)
+      }
+      (0..<depth).each { writer.write('\t') }; writer.write('}\n')
+    }
+    writer.write('\n')
+
+/*  } */
 }
