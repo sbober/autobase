@@ -3,7 +3,7 @@ property( file: "autobase.properties" )
 property( name: "column1.name", value: "updated-columnA" )
 property( name: "column2.name", value: "columnB" )
 changeSet( id: "datatypetest-1", author: "nvoxland" ){
-	validCheckSum( 'e5b7b29ce3a75640858cd022501852d2' )
+	validCheckSum( "e5b7b29ce3a75640858cd022501852d2" )
 	createTable( tableName: "dataTypeTest", schemaName: "" )	{
 		column( name: "id", type: "integer" )		{
 			constraints( primaryKey: "true", nullable: "false" )
@@ -106,19 +106,19 @@ changeSet( id: "compoundIndexTest", author: "nvoxland" ){
 }
 
 changeSet( id: "commentTest", author: "nvoxland" ){
-	comment( 'Creates a table and updates a value with actual SQL. Mainly for testing the comment tags' )
+	comment( "Creates a table and updates a value with actual SQL. Mainly for testing the comment tags" )
 	createTable( tableName: "commenttest" )	{
 		column( name: "id", type: "int" )
 	}
 
-	sql( 'insert into commenttest (id) values (1);\n            insert into commenttest (id) values (2);\n            insert into commenttest (id) values (3);' )	{
-		comment( 'Insert value into commenttest' )
+	sql( "insert into commenttest (id) values (1);\n            insert into commenttest (id) values (2);\n            insert into commenttest (id) values (3);" )	{
+		comment( "Insert value into commenttest" )
 	}
 
 }
 
 changeSet( id: "add-column-test1", author: "alan" ){
-	comment( 'Testing bug reported on mailing list' )
+	comment( "Testing bug reported on mailing list" )
 	createTable( tableName: "ADD_COLUMN_TEST_TABLE" )	{
 		column( name: "id", type: "int" )
 	}
@@ -133,7 +133,7 @@ changeSet( id: "add-column-test1", author: "alan" ){
 }
 
 changeSet( id: "tablespace-test1", author: "alan" ){
-	comment( 'Test tablespace support. Ignored if database does not support tablespaces' )
+	comment( "Test tablespace support. Ignored if database does not support tablespaces" )
 	createTable( tableName: "TABLESPACE_TEST_TABLE", tablespace: "liquibase2" )	{
 		column( name: "id", type: "int" )		{
 			constraints( nullable: "false" )
@@ -155,7 +155,7 @@ changeSet( id: "tablespace-test1", author: "alan" ){
 }
 
 changeSet( id: "contextstest-1", author: "nvoxland" ){
-	comment( 'Test how contexts work' )
+	comment( "Test how contexts work" )
 	createTable( tableName: "contextsTest" )	{
 		column( name: "id", type: "varchar(255)" )
 	}
@@ -312,14 +312,14 @@ changeSet( author: "nvoxland", id: "updateTest" ){
 		column( name: "varcharColumn", value: "new column 1 value" )
 		column( name: "dateCol", valueDate: "2008-01-01" )
 		column( name: "intCol", valueNumeric: "11" )
-		where( 'id=1' )
+		where( "id=1" )
 	}
 
 	update( tableName: "updateTest" )	{
 		column( name: "varcharColumn", value: "new column 2 value" )
 		column( name: "dateCol", valueDate: "2008-01-02" )
 		column( name: "intCol", valueNumeric: "12" )
-		where( 'id=2' )
+		where( "id=2" )
 	}
 
 }
@@ -355,7 +355,7 @@ changeSet( author: "nvoxland", id: "deleteTest" ){
 	}
 
 	delete( tableName: "deleteTest" )	{
-		where( 'id=1' )
+		where( "id=1" )
 	}
 
 	delete( tableName: "deleteTest" )
@@ -408,7 +408,7 @@ changeSet( id: "sampleCSVData2", author: "nvoxland" ){
 
 changeSet( id: "sampleCSVData3", author: "nvoxland" ){
 	preConditions(  )	{
-		sqlCheck( 'select count(*) from csvdata', expectedResult: "4" )
+		sqlCheck( "select count(*) from csvdata", expectedResult: "4" )
 	}
 
 	loadData( tableName: "csvdata", file: "sample.data3.csv" )	{
@@ -478,7 +478,7 @@ changeSet( id: "failWarnPrecondition", author: "nvoxland" ){
 
 changeSet( id: "failMarkRanPrecondition", author: "nvoxland" ){
 	preConditions( onError: "MARK_RAN" )	{
-		sqlCheck( 'select 1 from badtable' )
+		sqlCheck( "select 1 from badtable" )
 	}
 
 	createTable( tableName: "fail_markran_ran" )	{
@@ -489,7 +489,7 @@ changeSet( id: "failMarkRanPrecondition", author: "nvoxland" ){
 
 changeSet( id: "errorContinuePrecondition", author: "nvoxland" ){
 	preConditions( onError: "CONTINUE" )	{
-		sqlCheck( 'select 1 from badtable' )
+		sqlCheck( "select 1 from badtable" )
 	}
 
 	createTable( tableName: "error_continue_ran" )	{
@@ -500,7 +500,7 @@ changeSet( id: "errorContinuePrecondition", author: "nvoxland" ){
 
 changeSet( id: "errorWarnPrecondition", author: "nvoxland" ){
 	preConditions( onError: "WARN" )	{
-		sqlCheck( 'select 1 from badtable' )
+		sqlCheck( "select 1 from badtable" )
 	}
 
 	createTable( tableName: "error_warn_ran" )	{
@@ -511,7 +511,7 @@ changeSet( id: "errorWarnPrecondition", author: "nvoxland" ){
 
 changeSet( id: "errorMarkRanPrecondition", author: "nvoxland" ){
 	preConditions( onError: "MARK_RAN" )	{
-		sqlCheck( 'select 1 from badtable' )
+		sqlCheck( "select 1 from badtable" )
 	}
 
 	createTable( tableName: "error_markran_ran" )	{
