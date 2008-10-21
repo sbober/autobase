@@ -75,7 +75,7 @@ private void processNode(final Node node, final Writer writer, final int depth=0
     String textBody = node.children().find { it instanceof String }
     if(textBody) { 
       textBody = SU.replace(textBody, '\n', '\\n')
-      inParens << "'${textBody}'"
+      inParens << "\"${textBody}\""
     }
     node.attributes().entrySet().each { inParens << "${stripNamespace(it.key)}: \"$it.value\"" }
     writer.write(inParens.join(', ') ?: '')
