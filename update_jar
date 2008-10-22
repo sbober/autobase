@@ -2,6 +2,7 @@
 
 cd ../liquibase-dsl
 ./maker
+./tester
 cd ../autobase
 rm -v ./autobase/lib/*.jar
 cp -v ../liquibase-dsl/lbdsl.jar ./autobase/lib/

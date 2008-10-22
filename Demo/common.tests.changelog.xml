@@ -5,9 +5,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.8 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.8.xsd">
 
-    <property name="table.name" value="paramter_table"/>
+    <property name="table.name" value="parameter_table"/>
     <property file="autobase.properties" />
-    <property name="column1.name" value="updated-columnA"/>
+    <property name="column1.name" value="updated_columnA"/>
     <property name="column2.name" value="columnB"/>
 
     <changeSet id="datatypetest-1" author="nvoxland">
@@ -331,9 +331,9 @@
         </delete>
     </changeSet>
 
-    <changeSet id="failOnErrorTest" author="rs" failOnError="false">
+    <!--<changeSet id="failOnErrorTest" author="rs" failOnError="false">
         <dropTable tableName="DoesNotExist" />
-    </changeSet>
+    </changeSet>-->
 
     <changeSet id="createTableNamedPK" author="nvoxland">
         <createTable tableName="createtablenamedpk">

@@ -1,6 +1,6 @@
-property( name: "table.name", value: "paramter_table" )
+property( name: "table.name", value: "parameter_table" )
 property( file: "autobase.properties" )
-property( name: "column1.name", value: "updated-columnA" )
+property( name: "column1.name", value: "updated_columnA" )
 property( name: "column2.name", value: "columnB" )
 changeSet( id: "datatypetest-1", author: "nvoxland" ){
 	validCheckSum( "e5b7b29ce3a75640858cd022501852d2" )
@@ -359,10 +359,6 @@ changeSet( author: "nvoxland", id: "deleteTest" ){
 	}
 
 	delete( tableName: "deleteTest" )
-}
-
-changeSet( failOnError: "false", author: "rs", id: "failOnErrorTest" ){
-	dropTable( tableName: "DoesNotExist" )
 }
 
 changeSet( id: "createTableNamedPK", author: "nvoxland" ){

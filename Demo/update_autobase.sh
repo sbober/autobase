@@ -1,3 +1,4 @@
+rm stacktrace.log
 cd ..
 ./update_jar
 cd autobase
@@ -6,9 +7,9 @@ rm -rf ~/.grails
 grails clean
 grails package-plugin
 cd ../Demo
-rm -rvf ./migrations/*
-rm -rvf ./plugins/grails-autobase*
-rm -rvf ./plugins/autobase*
+rm -rf ./migrations/*
+rm -rf ./plugins/grails-autobase*
+rm -rf ./plugins/autobase*
 grails install-plugin ../autobase/grails-auto*.zip
 rm -rf ~/.grails
 grails clean

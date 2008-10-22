@@ -55,40 +55,28 @@ private String stripNamespace(final QName nodeName) {
 private void processNode(final Node node, final Writer writer, final int depth=0) {
   final String nodeName = stripNamespace(node.name())
 
-/*
-  if(nodeName.equalsIgnoreCase("property")) {
-    println "Processing property ${nodeName}"
-    (0..<depth).each{ writer.write('\t') }
-    writer.write("delegate.'")
-    writer.write(node.attributes().name)
-    writer.write("' = \"")
-    writer.write(node.attributes().value)
-    writer.write("\"")
-    writer.write('\n')
-  } else {
-*/
-
-    println "Processing node ${nodeName}"
-    (0..<depth).each{ writer.write('\t') }; writer.write(nodeName)
-    writer.write('( ')
-    List inParens = []
-    String textBody = node.children().find { it instanceof String }
-    if(textBody) { 
-      textBody = SU.replace(textBody, '\n', '\\n')
-      inParens << "\"${textBody}\""
+  println "Processing node ${nodeName}"
+  (0..<depth).each{ writer.write('\t') }; writer.write(nodeName)
+  writer.write('( ')
+  List inParens = []
+  String textBody = node.children().find { it instanceof String }
+  if(textBody) { 
+    textBody = SU.replace(textBody, '\n', '\\n')
+    inParens << "\"${textBody}\""
+  }
+  def attrs = node.attributes().entrySet()
+  if(nodeName == 'databaseChangeLog') { attrs = attrs.findAll { stripNamespace(it.key) != 'schemaLocation' } }
+  attrs.each { inParens << "${stripNamespace(it.key)}: \"$it.value\"" }
+  writer.write(inParens.join(', ') ?: '')
+  writer.write(' )')
+  def children = node.children().findAll { !(it instanceof String) }
+  if(children) {
+    (0..<depth).each { writer.write('\t') }; writer.write('{\n')
+    children.each { 
+      processNode(it, writer, depth + 1)
     }
-    node.attributes().entrySet().each { inParens << "${stripNamespace(it.key)}: \"$it.value\"" }
-    writer.write(inParens.join(', ') ?: '')
-    writer.write(' )')
-    def children = node.children().findAll { !(it instanceof String) }
-    if(children) {
-      (0..<depth).each { writer.write('\t') }; writer.write('{\n')
-      children.each { 
-        processNode(it, writer, depth + 1)
-      }
-      (0..<depth).each { writer.write('\t') }; writer.write('}\n')
-    }
-    writer.write('\n')
+    (0..<depth).each { writer.write('\t') }; writer.write('}\n')
+  }
+  writer.write('\n')
 
-/*  } */
 }

@@ -49,8 +49,8 @@ log4j {
     appender.'stacktraceLog.layout.ConversionPattern'=pattern
     appender.'stacktraceLog.File'="stacktrace.log"
     rootLogger="error,stdout"
+    logger.AutobaseGrailsPlugin="debug"
     logger {
-        AutobaseGrailsPlugin="debug"
         grails="error"
         StackTrace="error,stacktraceLog"
         org {
