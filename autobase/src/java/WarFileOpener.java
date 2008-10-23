@@ -17,8 +17,8 @@ public class WarFileOpener extends FileSystemFileOpener implements FileOpener {
     final String timestamp = Long.toString(System.currentTimeMillis(), 16);
     final File base = new File(System.getProperty("java.io.tmpdir"), "autobase-" + timestamp).getAbsoluteFile();
     base.mkdirs();
-    System.out.println("Base directory: " + base.getAbsolutePath());
-    //deleteDirOnExit(base);
+    //System.out.println("Base directory: " + base.getAbsolutePath());
+    deleteDirOnExit(base);
     for(ZipEntry entry = source.getNextEntry(); entry != null; entry = source.getNextEntry()) {
       final File entryFile = new File(base, entry.getName()).getAbsoluteFile();
       System.out.println("Writing out file: " + entryFile.getAbsolutePath());
