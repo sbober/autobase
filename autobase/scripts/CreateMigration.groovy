@@ -1,6 +1,7 @@
 import org.codehaus.groovy.grails.commons.GrailsClassUtils as GCU
 import liquibase.dsl.properties.LbdslProperties as Props
 import org.apache.commons.lang.StringUtils as SU
+import java.text.SimpleDateFormat
 
 Ant.property(environment:"env")                             
 grailsHome = Ant.antProject.properties."env.GRAILS_HOME"
@@ -35,14 +36,4 @@ target ('default': "Creates a new migration") {
         token:"@ID@", value:name )
 	}	                                                                            
 	println "Migration generated at ${fileName}"
-  def editor = Ant.antProject.properties."env.EDITOR"
-  if(editor) {
-    def proc = Runtime.runtime.exec("${editor} ${fileName}") 
-    proc.waitFor()
-    if(proc.exitValue() != 0) {
-      println "Error trying to edit ${fileName} with ${editor}"
-    }
-  } else {
-    println "(If you set the EDITOR environment variable, you could edit the file directly.)"
-  }
 }
