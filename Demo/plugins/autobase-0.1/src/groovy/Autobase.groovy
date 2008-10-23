@@ -5,6 +5,7 @@ import liquibase.dsl.command.MigrateCommand
 import liquibase.dsl.properties.LbdslProperties as Props
 import liquibase.parser.groovy.*;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder as Config
+import org.codehaus.groovy.grails.commons.ApplicationHolder
 import grails.util.GrailsUtil
 
 class Autobase {
@@ -13,9 +14,9 @@ class Autobase {
 
 	static void migrate() {
     try {
-      if(GrailsUtil.isDevelopmentEnv()) { LogFactory.loggingLevel = "ALL" }
       assignSystemProperties();
-      def fileOpener = new FileSystemFileOpener()
+      def fileOpener = findFileOpener() 
+      log.info("Using a file opener of type ${fileOpener?.class}")
       Database db = getDatabase();
       if(fileOpener.getResourceAsStream("./migrations/changelog.groovy")) {
         new LiquibaseDsl("./migrations/changelog.groovy", fileOpener, db).update(null)
@@ -27,6 +28,14 @@ class Autobase {
       throw e
     }
 	}
+
+  static FileOpener findFileOpener() {
+    if(ApplicationHolder.application?.isWarDeployed()) {
+      return new WarFileOpener()
+    } else {
+      return new FileSystemFileOpener()
+    }
+  }
 
   static void assignSystemProperties() {
     assignSystemProperty("lbdsl.home", new File((String)System.properties["user.home"], (String)".lbdsl").canonicalPath)

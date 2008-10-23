@@ -1,3 +1,2 @@
-* Support running from within a WAR
 * Cope with Liquibase's use of java.util.logging (UGH)
 * Remove the println statements and turn them into logging statements

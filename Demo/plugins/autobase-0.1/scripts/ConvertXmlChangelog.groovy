@@ -55,7 +55,7 @@ private String stripNamespace(final QName nodeName) {
 private void processNode(final Node node, final Writer writer, final int depth=0) {
   final String nodeName = stripNamespace(node.name())
 
-  println "Processing node ${nodeName}"
+  //println "Processing node ${nodeName}"
   (0..<depth).each{ writer.write('\t') }; writer.write(nodeName)
   writer.write('( ')
   List inParens = []
