@@ -7,21 +7,22 @@ import liquibase.parser.groovy.*;
 import org.codehaus.groovy.grails.commons.ConfigurationHolder as Config
 import org.codehaus.groovy.grails.commons.ApplicationHolder
 import grails.util.GrailsUtil
+import org.apache.log4j.*;
 
 class Autobase {
 
-  private static final def log = LogFactory.getLogger();
+  private static final Logger log = Logger.getLogger(Autobase)
 
 	static void migrate() {
     try {
       assignSystemProperties();
       def fileOpener = findFileOpener() 
-      log.info("Using a file opener of type ${fileOpener?.class}")
+      log.debug("Using a file opener of type ${fileOpener?.class}")
       Database db = getDatabase();
       if(fileOpener.getResourceAsStream("./migrations/changelog.groovy")) {
         new LiquibaseDsl("./migrations/changelog.groovy", fileOpener, db).update(null)
       } else {
-        log.warning("No changelog found")
+        log.warn("No changelog found")
       }
     } catch(Exception e) {
       GrailsUtil.deepSanitize(e)

@@ -14,7 +14,10 @@
   limitations under the License.
 */
 import liquibase.LiquibaseDsl;
+import liquibase.log.LogFactory;
+import java.util.logging.Level as JavaLogLevel;
 import grails.util.GrailsUtil;
+import org.codehaus.groovy.grails.commons.ConfigurationHolder
 import org.apache.log4j.*;
 
 
@@ -47,7 +50,7 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
     def documentation = "http://github.com/RobertFischer/autobase/"
 		//"http://grails.org/Autobase+Plugin"
 
-		private static final def doMigrate = { 
+		private static final Closure doMigrate = { 
 			try {
         log.info("Beginning Autobase migration") 
 				Autobase.migrate()
@@ -58,6 +61,21 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 			}
 		}
 
+    private static final Closure doAssignLogLevel = {
+      try {
+        def level = ConfigurationHolder.config.liquibase?.logLevel
+        if(!level) {
+          level = JavaLogLevel.INFO
+        } else if(level instanceof String) {
+          level = JavaLogLevel.parse(level)
+        } 
+        LogFactory.logger.level = level
+			} catch(Exception e) {
+				GrailsUtil.deepSanitize(e)
+				log.error("Error assigning Liquibase log level", e)
+			}
+    }
+
     def doWithSpring = { }
    
     def doWithApplicationContext = {}
@@ -65,7 +83,10 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
     def doWithWebDescriptor = {}
 	                                      
     // Do at the very last moment of app start-up
-    def doWithDynamicMethods = doMigrate
+    def doWithDynamicMethods = {
+      doAssignLogLevel()
+      doMigrate()
+    }
 
     // Implements code that is executed when any artefact that this plugin is
     // watching is modified and reloaded. The event contains: event.source,
@@ -74,5 +95,8 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 
 		// Implements code that is executed when the project configuration changes.
    	// The event is the same as for 'onChange'.
-    def onConfigChange = doMigrate 
+    def onConfigChange = {
+      doAssignLogLevel()
+      doMigrate()
+    }
 }

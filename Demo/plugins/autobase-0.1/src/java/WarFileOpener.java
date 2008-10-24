@@ -3,8 +3,11 @@ import java.io.*;
 import java.util.*;
 import java.net.*;
 import java.util.zip.*;
+import org.apache.log4j.*;
 
 public class WarFileOpener extends FileSystemFileOpener implements FileOpener {
+
+  private static final Logger logger = Logger.getLogger(WarFileOpener.class);
 
   public WarFileOpener() throws IOException {
     super(expandStream(createZipStream()).getAbsolutePath());
@@ -17,11 +20,11 @@ public class WarFileOpener extends FileSystemFileOpener implements FileOpener {
     final String timestamp = Long.toString(System.currentTimeMillis(), 16);
     final File base = new File(System.getProperty("java.io.tmpdir"), "autobase-" + timestamp).getAbsoluteFile();
     base.mkdirs();
-    System.out.println("Base directory: " + base.getAbsolutePath());
-    //deleteDirOnExit(base);
+    logger.debug("Base directory: " + base.getAbsolutePath());
+    deleteDirOnExit(base);
     for(ZipEntry entry = source.getNextEntry(); entry != null; entry = source.getNextEntry()) {
       final File entryFile = new File(base, entry.getName()).getAbsoluteFile();
-      System.out.println("Writing out file: " + entryFile.getAbsolutePath());
+      logger.debug("Writing out file: " + entryFile.getAbsolutePath());
       entryFile.getParentFile().mkdirs();
       if(entry.isDirectory()) {
         source.closeEntry();
