@@ -25,16 +25,12 @@ class AutobaseGrailsPlugin {
 
     private static final Logger log = Logger.getLogger(AutobaseGrailsPlugin);
 
-    def version = 0.1
-    //def dependsOn = [hibernate:GrailsUtil.grailsVersion]
+    def version = 0.2
+    def dependsOn = [hibernate:GrailsUtil.grailsVersion]
 		//def observe = ['hibernate']
-    def dependsOn = [:]
+    //def dependsOn = [:]
 		def observe = []
-		def watchedResources = [ 
-      "file:./grails-app/migration/*.groovy",
-      "file:./grails-app/migration/*/*.groovy",
-      "file:./grails-app/domain/*.groovy"
-    ]
+		def watchedResources = []
 
     // TODO Fill in these fields
     def author = "Robert Fischer"
@@ -47,7 +43,7 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://github.com/RobertFischer/autobase/"
+    def documentation = "http://github.com/RobertFischer/autobase/wikis"
 		//"http://grails.org/Autobase+Plugin"
 
 		private static final Closure doMigrate = { 
@@ -66,8 +62,11 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
         def level = ConfigurationHolder.config.liquibase?.logLevel
         if(!level) {
           level = JavaLogLevel.INFO
+          log.warn("Defaulting to Liquibase logging level of ${level}: please set 'liquibase.logLevel' to a java.util.logging.Level value")
         } else if(level instanceof String) {
           level = JavaLogLevel.parse(level)
+        } else if(level instanceof JavaLogLevel) {
+          // Just fall through
         } else {
           throw new RuntimeException("No idea how to assign logLevel of ${level} (${level?.class})")
         }
@@ -93,12 +92,9 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
     // Implements code that is executed when any artefact that this plugin is
     // watching is modified and reloaded. The event contains: event.source,
     // event.application, event.manager, event.ctx, and event.plugin.
-    def onChange = doMigrate
+    def onChange = {}
 
 		// Implements code that is executed when the project configuration changes.
    	// The event is the same as for 'onChange'.
-    def onConfigChange = {
-      doAssignLogLevel()
-      doMigrate()
-    }
+    def onConfigChange = {}
 }
