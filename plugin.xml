@@ -1,4 +1,4 @@
-<plugin name='autobase' version='0.1'>
+<plugin name='autobase' version='0.2'>
   <author>Robert Fischer</author>
   <authorEmail>robert.fischer@smokejumperit.com</authorEmail>
   <title>Automate your database work as much as possible</title>
@@ -6,9 +6,6 @@
 
 The approach to this plugin is to leave the database update mode ("hbm2ddl.auto" value) as "update", and to manage alterations to the database schema through checking in changesets to a folder.  The changesets are made up of Liquibase's many "refactorings": http://www.liquibase.org/manual/home#available_database_refactorings
 </description>
-  <documentation>http://github.com/RobertFischer/autobase/</documentation>
-  <resources>
-    <resource>DataSource</resource>
-    <resource>UrlMappings</resource>
-  </resources>
+  <documentation>http://github.com/RobertFischer/autobase/wikis</documentation>
+  <resources />
 </plugin>
