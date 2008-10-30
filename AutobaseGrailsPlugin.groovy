@@ -25,10 +25,8 @@ class AutobaseGrailsPlugin {
 
     private static final Logger log = Logger.getLogger(AutobaseGrailsPlugin);
 
-    def version = 0.2
+    def version = 0.3
     def dependsOn = [hibernate:GrailsUtil.grailsVersion]
-		//def observe = ['hibernate']
-    //def dependsOn = [:]
 		def observe = []
 		def watchedResources = []
 

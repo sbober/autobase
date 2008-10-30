@@ -1,4 +1,4 @@
-<plugin name='autobase' version='0.2'>
+<plugin name='autobase' version='0.3'>
   <author>Robert Fischer</author>
   <authorEmail>robert.fischer@smokejumperit.com</authorEmail>
   <title>Automate your database work as much as possible</title>
