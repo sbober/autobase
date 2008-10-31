@@ -1,0 +1,70 @@
+9
+
+dir
+44654
+https://svn.codehaus.org/grails-plugins/grails-autobase/trunk/web-app/images
+https://svn.codehaus.org/grails-plugins
+
+
+
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+832c1c66-4827-0410-8465-ccb17913cd09
+
+grails_logo.jpg
+file
+
+
+
+
+2008-10-24T19:26:53.000000Z
+b4bf8db95028eb2afe9f022be373d189
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+has-props
+
+spinner.gif
+file
+
+
+
+
+2008-10-24T19:26:53.000000Z
+c7b3cbb3ec8249a7121b722cdd76b870
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+has-props
+
+skin
+dir
+
+favicon.ico
+file
+
+
+
+
+2008-10-24T19:26:53.000000Z
+2e19696ae5604f9eccb2e9cca974dd94
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+has-props
+

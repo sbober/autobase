@@ -1,16 +1,14 @@
 rm stacktrace.log
-cd ..
-./update_jar
-cd autobase
+cd $WKDIR/plugins/Autobase/trunk
 rm *.zip
 rm -rf ~/.grails
 grails clean
 grails package-plugin
-cd ../Demo
+cd $WKDIR/autobase/Demo
 rm -rf ./migrations/*
 rm -rf ./plugins/grails-autobase*
 rm -rf ./plugins/autobase*
-grails install-plugin ../autobase/grails-auto*.zip
+grails install-plugin $WKDIR/plugins/Autobase/trunk/grails-auto*.zip
 rm -rf ~/.grails
 grails clean
 cp -vf TestingMigration.groovy ./migrations/TestingMigration.groovy
