@@ -44,10 +44,10 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
     def documentation = "http://github.com/RobertFischer/autobase/wikis"
 		//"http://grails.org/Autobase+Plugin"
 
-		private static final Closure doMigrate = { 
+		private static final Closure doMigrate = { appCtx ->
 			try {
         log.info("Beginning Autobase migration") 
-				Autobase.migrate()
+				Autobase.migrate(appCtx)
         log.info("Successfully completed Autobase migration") 
 			} catch(Exception e) {
 				GrailsUtil.deepSanitize(e)
@@ -77,15 +77,15 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 
     def doWithSpring = { }
    
-    def doWithApplicationContext = {}
+    def doWithApplicationContext = { appCtx ->
+      doAssignLogLevel()
+      doMigrate(appCtx)
+    }
 
     def doWithWebDescriptor = {}
 	                                      
     // Do at the very last moment of app start-up
-    def doWithDynamicMethods = {
-      doAssignLogLevel()
-      doMigrate()
-    }
+    def doWithDynamicMethods = {}
 
     // Implements code that is executed when any artefact that this plugin is
     // watching is modified and reloaded. The event contains: event.source,

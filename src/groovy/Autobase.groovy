@@ -22,7 +22,10 @@ class Autobase {
 
   private static final Logger log = Logger.getLogger(Autobase)
 
-	static void migrate() {
+  private static final InheritableThreadLocal appCtxHolder = new InheritableThreadLocal()
+
+	static void migrate(appCtx) {
+    appCtxHolder.set(appCtx)
     boolean attachedSession = false
     try {
       attachedSession = attachHibernateSession()
@@ -47,6 +50,7 @@ class Autobase {
           log.error("Cannot detach the Hibernate session", e2)
         }
       }
+      appCtxHolder.set(null)
     }
   }
 
@@ -93,8 +97,7 @@ class Autobase {
   }
 
   private static SessionFactory getSessionFactory() {
-    def ctx = SCH.servletContext.getAttribute(GrailsApplicationAttributes.APPLICATION_CONTEXT)
-    //def ctx = App.application.parentContext.servletContext.getAttribute(WAC.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE)
+    def ctx = appCtxHolder.get()
     if(!ctx) { throw new IllegalStateException("No web application context found") } 
     return (SessionFactory)ctx.getBean('sessionFactory')
   }
