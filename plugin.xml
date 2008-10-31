@@ -1,4 +1,4 @@
-<plugin name='autobase' version='0.3'>
+<plugin name='autobase' version='0.4'>
   <author>Robert Fischer</author>
   <authorEmail>robert.fischer@smokejumperit.com</authorEmail>
   <title>Automate your database work as much as possible</title>
@@ -8,5 +8,13 @@ The approach to this plugin is to leave the database update mode ("hbm2ddl.auto"
 </description>
   <documentation>http://github.com/RobertFischer/autobase/wikis</documentation>
   <resources>
+    <resource>BootStrap</resource>
+    <resource>Config</resource>
+    <resource>DataSource</resource>
+    <resource>spring.resources</resource>
+    <resource>UrlMappings</resource>
+    <resource>Token</resource>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
   </resources>
 </plugin>
