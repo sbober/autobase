@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/src/templates/artifacts
+END
+DatabaseChangeLog.groovy
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/src/templates/artifacts/DatabaseChangeLog.groovy
+END
+Migration.groovy
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/src/templates/artifacts/Migration.groovy
+END

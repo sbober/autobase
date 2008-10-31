@@ -1,0 +1,3 @@
+* Cope with Liquibase's use of java.util.logging (UGH)
+* Remove the println statements and turn them into logging statements
+* Auto-launch an editor when a migration is created, assuming that $EDITOR is set.

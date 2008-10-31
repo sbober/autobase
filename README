@@ -1,0 +1,3 @@
+A Grails plugin which aims to automate database management as much as possible by leveraging the established Liquibase technology.
+
+For more information or to hire the developer, contact Robert Fischer at robert dot fischer _at_ smokejumperit dot com.  You can read more about him at his blog (http://enfranchisedmind.com/blog) or at his Twitter stream (http://twitter.com/RobertFischer).  His motivation for developing this is because he considers it ridiculous that database management is as hard as it is, and he's tired of the reptition.  Liquibase is an awesome solution to most of that, but integrating it tightly with Grails should give a lot better results than the current Grails Liquibase plugin.

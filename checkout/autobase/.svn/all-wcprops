@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk
+END
+grails-autobase-0.1.zip
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/grails-autobase-0.1.zip
+END
+AutobaseGrailsPlugin.groovy
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/grails-plugins/!svn/ver/44662/grails-autobase/trunk/AutobaseGrailsPlugin.groovy
+END
+plugin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/plugin.xml
+END
+application.properties
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/grails-plugins/!svn/ver/44633/grails-autobase/trunk/application.properties
+END

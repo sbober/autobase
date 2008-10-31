@@ -1,0 +1,49 @@
+9
+
+dir
+44654
+https://svn.codehaus.org/grails-plugins/grails-autobase/trunk/web-app
+https://svn.codehaus.org/grails-plugins
+
+
+
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+832c1c66-4827-0410-8465-ccb17913cd09
+
+index.gsp
+file
+
+
+
+
+2008-10-24T19:26:53.000000Z
+e9f4d3450ba02fe92d55f4ae4b53dee8
+2008-10-24T19:26:53.590505Z
+44633
+robertfischer
+
+images
+dir
+
+css
+dir
+
+js
+dir
+

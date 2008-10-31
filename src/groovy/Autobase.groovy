@@ -1,4 +1,5 @@
 import liquibase.*
+
 import liquibase.database.*
 import liquibase.log.LogFactory;
 import liquibase.dsl.command.MigrateCommand
@@ -17,6 +18,9 @@ import org.springframework.orm.hibernate3.SessionHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
 import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes
+import org.codehaus.groovy.grails.commons.ApplicationHolder
+import grails.util.GrailsUtil
+import org.apache.log4j.*;
 
 class Autobase {
 
