@@ -1,37 +1,0 @@
-9
-
-dir
-44654
-https://svn.codehaus.org/grails-plugins/grails-autobase/trunk/src
-https://svn.codehaus.org/grails-plugins
-
-
-
-2008-10-24T19:26:53.590505Z
-44633
-robertfischer
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-832c1c66-4827-0410-8465-ccb17913cd09
-
-java
-dir
-
-groovy
-dir
-
-templates
-dir
-
