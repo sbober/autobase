@@ -1,0 +1,4 @@
+--Output from testSomething--
+--Output from testGroovyScriptChangeFindAndBuild--
+--Output from testGroovyScriptChangeIsAChange--
+

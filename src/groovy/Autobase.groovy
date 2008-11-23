@@ -92,6 +92,7 @@ class Autobase {
 
   static void assignSystemProperties() {
     assignSystemProperty("lbdsl.home", new File((String)System.properties["user.home"], (String)".lbdsl").canonicalPath)
+    Props.instance.addChangePackage("autobase.change")
   }
 
   static void assignSystemProperty(String propName, String defValue) {
