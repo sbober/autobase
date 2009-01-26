@@ -7,11 +7,11 @@ import java.util.Enumeration;
 public class GrailsClassLoaderFileOpener extends ClassLoaderFileOpener implements FileOpener {
 
     public InputStream getResourceAsStream(String file) throws IOException {
-				super("grails-app/migrations/${file}")
+				return super.getResourceAsStream('grails-app/migrations/' + file)
     }
 
     public Enumeration<URL> getResources(String packageName) throws IOException {
-				super("grails-app/migrations/${packageName}")
+				return super.getResources('grails-app/migrations/' + packageName)
     }
 
 }
