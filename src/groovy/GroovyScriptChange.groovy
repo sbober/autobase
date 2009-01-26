@@ -5,6 +5,7 @@ import liquibase.change.*;
 import liquibase.database.*;
 import liquibase.database.structure.*;
 import liquibase.database.sql.*;
+import liquibase.database.sql.visitor.*; 
 import liquibase.exception.*;
 import groovy.sql.*;
 import org.codehaus.groovy.control.*;
@@ -24,7 +25,7 @@ public class GroovyScriptChange implements liquibase.change.Change {
   String getChangeName() { return "groovyScript" }
   String getTagName() { return this.changeName }
 
-  void executeStatements(Database db) throws JDBCException, UnsupportedChangeException {
+  void executeStatements(Database db, List<SqlVisitor> sqlVisitors) throws JDBCException, UnsupportedChangeException {
     if(!sourceFile) {
       throw new IllegalStateException(changeName + " tag requires 'sourceFile' property to be set")
     }
@@ -43,15 +44,15 @@ public class GroovyScriptChange implements liquibase.change.Change {
     result = shell.evaluate(fileOpener.getResourceAsStream(sourceFile).text, logicalName)
   }
 
-  void saveStatements(Database db, Writer writer) throws IOException, UnsupportedChangeException,  StatementNotSupportedOnDatabaseException {
+  void saveStatements(Database db, List<SqlVisitor> sqlVisitors, Writer writer) throws IOException, UnsupportedChangeException,  StatementNotSupportedOnDatabaseException {
     writer << (db.lineComment + " Insert arbitrary Groovy processing from ${sourceFile} here")
   }
 
-  void executeRollbackStatements(Database database) throws JDBCException, UnsupportedChangeException, RollbackImpossibleException {
+  void executeRollbackStatements(Database database, List<SqlVisitor> sqlVisitors) throws JDBCException, UnsupportedChangeException, RollbackImpossibleException {
     throw new RollbackImpossibleException("Can't roll back arbitrary Groovy code")
   }
 
-  void saveRollbackStatement(Database database, java.io.Writer writer)
+  void saveRollbackStatement(Database database, List<SqlVisitor> sqlVisitors, java.io.Writer writer)
                            throws java.io.IOException,
                                   UnsupportedChangeException,
                                   RollbackImpossibleException,
@@ -71,7 +72,7 @@ public class GroovyScriptChange implements liquibase.change.Change {
 
   String getConfirmationMessage() { "Executed Groovy in ${sourceFile}" }
 
-  Element createNode(Document currentChangeLogDOM) {
+  Node createNode(Document currentChangeLogDOM) {
     def element = currentChangeLogDOM.createElement(changeName)
     setAttribute("sourceFile", sourceFile)
     return element
