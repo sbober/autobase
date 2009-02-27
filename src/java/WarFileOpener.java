@@ -1,9 +1,15 @@
-import liquibase.*;
-import java.io.*;
-import java.util.*;
-import java.net.*;
-import java.util.zip.*;
-import org.apache.log4j.*;
+import liquibase.FileSystemFileOpener;
+import liquibase.ClassLoaderFileOpener;
+import liquibase.FileOpener;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipEntry;
+import org.apache.log4j.Logger;
 
 public class WarFileOpener extends FileSystemFileOpener implements FileOpener {
 
